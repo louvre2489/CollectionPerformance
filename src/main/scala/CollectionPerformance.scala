@@ -24,7 +24,7 @@ object CollectionPerformance extends App with SeqPerformance with MapPerformance
 
 //  lazyListSequentialAccess()
 
-  println("----------------------------------------")
+  println("----------------client_developer_application------------------------")
 
   // Map
 //  mapAdd()
@@ -43,10 +43,6 @@ object CollectionPerformance extends App with SeqPerformance with MapPerformance
 
   println("----------------------------------------")
 
-//  treeMapTreeSeqMap()
-
-  println("----------------------------------------")
-
   // Set
 //  setAdd()
 
@@ -56,9 +52,5 @@ object CollectionPerformance extends App with SeqPerformance with MapPerformance
 
   println("----------------------------------------")
 
-  setSequentialAccess()
-
-  println("----------------------------------------")
-
-  hashSetBitSet()
+//  setSequentialAccess()
 }

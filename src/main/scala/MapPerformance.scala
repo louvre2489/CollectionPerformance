@@ -356,213 +356,130 @@ trait MapPerformance extends PerformanceSupport {
 
   def vectorMapListMap() = {
 
-    println(s"データ追加 ListMap vs VectorMap")
+    println(s"データ追加 ListMap vs VectorMap vs TreeSeqMap")
 
     // 処理時間格納のリスト
     var listResult = List.empty[Long]
     var vectorResult = List.empty[Long]
-
-    // 空コレクションデータ
-    val eList = ListMap.empty[Int, Int]
-    val eVector = VectorMap.empty[Int, Int]
-
-    println(s"対象件数: ${SIZE_100000}件")
-
-    listResult = List.empty[Long]
-    vectorResult = List.empty[Long]
-
-    for (i <- 1 to 100) {
-      listResult =
-        listResult.+:(printExecTime(addMapProc(eList)(SIZE_100000))(i))
-      vectorResult =
-        vectorResult.+:(printExecTime(addMapProc(eVector)(SIZE_100000))(i))
-    }
-
-    printAverage(
-      "ListMap",
-      listResult,
-      "VectorMap",
-      vectorResult
-    )
-
-    println(s"キーアクセス ListMap vs VectorMap")
-
-    // アクセス性能検証用データ
-    val listMap_100000 = addMapProc(eList)(SIZE_100000)
-    val vectorMap_100000 = addMapProc(eVector)(SIZE_100000)
-
-    println(s"対象件数: ${SIZE_100000}件 対象キー：最初に登録した要素のキー")
-
-    listResult = List.empty[Long]
-    vectorResult = List.empty[Long]
-
-    for (i <- 1 to 100) {
-      listResult = listResult.+:(printExecTime(keyAccess(listMap_100000)(1))(i))
-      vectorResult = vectorResult.+:(printExecTime(keyAccess(vectorMap_100000)(1))(i))
-    }
-
-    printAverage(
-      "ListMap",
-      listResult,
-      "VectorMap",
-      vectorResult
-    )
-
-    println(s"対象件数: ${SIZE_100000}件 対象キー：中間に登録した要素のキー")
-
-    listResult = List.empty[Long]
-    vectorResult = List.empty[Long]
-
-    for (i <- 1 to 100) {
-      listResult = listResult.+:(printExecTime(keyAccess(listMap_100000)(SIZE_100000/2))(i))
-      vectorResult = vectorResult.+:(printExecTime(keyAccess(vectorMap_100000)(SIZE_100000/2))(i))
-    }
-
-    printAverage(
-      "ListMap",
-      listResult,
-      "VectorMap",
-      vectorResult
-    )
-
-    println(s"対象件数: ${SIZE_100000}件 対象キー：最後に登録した要素のキー")
-
-    listResult = List.empty[Long]
-    vectorResult = List.empty[Long]
-
-    for (i <- 1 to 100) {
-      listResult = listResult.+:(printExecTime(keyAccess(listMap_100000)(SIZE_100000))(i))
-      vectorResult = vectorResult.+:(printExecTime(keyAccess(vectorMap_100000)(SIZE_100000))(i))
-    }
-
-    printAverage(
-      "ListMap",
-      listResult,
-      "VectorMap",
-      vectorResult
-    )
-
-    println(s"シーケンシャルアクセス ListMap vs VectorMap")
-
-    println(s"対象件数: ${SIZE_100000}件")
-
-    for (i <- 1 to 100) {
-      listResult =
-        listResult.+:(printExecTime(sequentialAccess(listMap_100000))(i))
-      vectorResult =
-        vectorResult.+:(printExecTime(sequentialAccess(vectorMap_100000))(i))
-    }
-
-    printAverage(
-      "ListMap",
-      listResult,
-      "VectorMap",
-      vectorResult
-    )
-  }
-
-  def treeMapTreeSeqMap() = {
-
-    println(s"データ追加 ListMap vs TreeSeqMap")
-
-    // 処理時間格納のリスト
-    var listResult = List.empty[Long]
     var treeSeqResult = List.empty[Long]
 
     // 空コレクションデータ
     val eList = ListMap.empty[Int, Int]
+    val eVector = VectorMap.empty[Int, Int]
     val eTreeSeq = TreeSeqMap.empty[Int, Int]
 
-    println(s"対象件数: ${SIZE_10000}件")
+    println(s"対象件数: ${SIZE_1000000}件")
 
     listResult = List.empty[Long]
+    vectorResult = List.empty[Long]
     treeSeqResult = List.empty[Long]
 
     for (i <- 1 to 100) {
       listResult =
-        listResult.+:(printExecTime(addMapProc(eList)(SIZE_10000))(i))
+        listResult.+:(printExecTime(addMapProc(eList)(SIZE_1000000))(i))
+      vectorResult =
+        vectorResult.+:(printExecTime(addMapProc(eVector)(SIZE_1000000))(i))
       treeSeqResult =
-        treeSeqResult.+:(printExecTime(addMapProc(eTreeSeq)(SIZE_10000))(i))
+        treeSeqResult.+:(printExecTime(addMapProc(eTreeSeq)(SIZE_1000000))(i))
     }
 
     printAverage(
       "ListMap",
       listResult,
+      "VectorMap",
+      vectorResult,
       "TreeSeqMap",
       treeSeqResult
     )
 
-    println(s"キーアクセス ListMap vs TreeSeqMap")
+    println(s"キーアクセス ListMap vs VectorMap vs TreeSeqMap")
 
     // アクセス性能検証用データ
-    val treeMap_10000 = addMapProc(eList)(SIZE_10000)
-    val treeSeqMap_10000 = addMapProc(eTreeSeq)(SIZE_10000)
+    val listMap_1000000 = addMapProc(eList)(SIZE_1000000)
+    val vectorMap_1000000 = addMapProc(eVector)(SIZE_1000000)
+    val treeSeqMap_1000000 = addMapProc(eVector)(SIZE_1000000)
 
-    println(s"対象件数: ${SIZE_100000}件 対象キー：最初に登録した要素のキー")
+    println(s"対象件数: ${SIZE_1000000}件 対象キー：最初に登録した要素のキー")
 
     listResult = List.empty[Long]
+    vectorResult = List.empty[Long]
     treeSeqResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      listResult = listResult.+:(printExecTime(keyAccess(treeMap_10000)(1))(i))
-      treeSeqResult = treeSeqResult.+:(printExecTime(keyAccess(treeSeqMap_10000)(1))(i))
+      listResult = listResult.+:(printExecTime(keyAccess(listMap_1000000)(1))(i))
+      vectorResult = vectorResult.+:(printExecTime(keyAccess(vectorMap_1000000)(1))(i))
+      treeSeqResult = treeSeqResult.+:(printExecTime(keyAccess(treeSeqMap_1000000)(1))(i))
     }
 
     printAverage(
       "ListMap",
       listResult,
+      "VectorMap",
+      vectorResult,
       "TreeSeqMap",
       treeSeqResult
     )
 
-    println(s"対象件数: ${SIZE_10000}件 対象キー：中間に登録した要素のキー")
+    println(s"対象件数: ${SIZE_1000000}件 対象キー：中間に登録した要素のキー")
 
     listResult = List.empty[Long]
+    vectorResult = List.empty[Long]
     treeSeqResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      listResult = listResult.+:(printExecTime(keyAccess(treeMap_10000)(SIZE_10000/2))(i))
-      treeSeqResult = treeSeqResult.+:(printExecTime(keyAccess(treeSeqMap_10000)(SIZE_10000/2))(i))
+      listResult = listResult.+:(printExecTime(keyAccess(listMap_1000000)(SIZE_1000000/2))(i))
+      vectorResult = vectorResult.+:(printExecTime(keyAccess(vectorMap_1000000)(SIZE_1000000/2))(i))
+      treeSeqResult = treeSeqResult.+:(printExecTime(keyAccess(treeSeqMap_1000000)(SIZE_1000000/2))(i))
     }
 
     printAverage(
       "ListMap",
       listResult,
+      "VectorMap",
+      vectorResult,
       "TreeSeqMap",
       treeSeqResult
     )
 
-    println(s"対象件数: ${SIZE_10000}件 対象キー：最後に登録した要素のキー")
+    println(s"対象件数: ${SIZE_1000000}件 対象キー：最後に登録した要素のキー")
 
     listResult = List.empty[Long]
+    vectorResult = List.empty[Long]
     treeSeqResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      listResult = listResult.+:(printExecTime(keyAccess(treeMap_10000)(SIZE_10000))(i))
-      treeSeqResult = treeSeqResult.+:(printExecTime(keyAccess(treeSeqMap_10000)(SIZE_10000))(i))
+      listResult = listResult.+:(printExecTime(keyAccess(listMap_1000000)(SIZE_1000000))(i))
+      vectorResult = vectorResult.+:(printExecTime(keyAccess(vectorMap_1000000)(SIZE_1000000))(i))
+      treeSeqResult = treeSeqResult.+:(printExecTime(keyAccess(treeSeqMap_1000000)(SIZE_1000000))(i))
     }
 
     printAverage(
       "ListMap",
       listResult,
+      "VectorMap",
+      vectorResult,
       "TreeSeqMap",
       treeSeqResult
     )
 
-    println(s"シーケンシャルアクセス ListMap vs TreeSeqMap")
+    println(s"シーケンシャルアクセス ListMap vs VectorMap vs TreeSeqMap")
 
-    println(s"対象件数: ${SIZE_10000}件")
+    println(s"対象件数: ${SIZE_1000000}件")
 
     for (i <- 1 to 100) {
       listResult =
-        listResult.+:(printExecTime(sequentialAccess(treeMap_10000))(i))
+        listResult.+:(printExecTime(sequentialAccess(listMap_1000000))(i))
+      vectorResult =
+        vectorResult.+:(printExecTime(sequentialAccess(vectorMap_1000000))(i))
       treeSeqResult =
-        treeSeqResult.+:(printExecTime(sequentialAccess(treeSeqMap_10000))(i))
+        treeSeqResult.+:(printExecTime(sequentialAccess(treeSeqMap_1000000))(i))
     }
 
     printAverage(
       "ListMap",
       listResult,
+      "VectorMap",
+      vectorResult,
       "TreeSeqMap",
       treeSeqResult
     )
