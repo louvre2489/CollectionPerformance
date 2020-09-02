@@ -21,9 +21,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      vectorResult =
-        vectorResult.+:(printExecTime(addProc(eVector)(SIZE_1000000))(i))
-      listResult = listResult.+:(printExecTime(addProc(eList)(SIZE_1000000))(i))
+      vectorResult = printExecTime(addProc(eVector)(SIZE_1000000))(i) :: vectorResult
+      listResult = printExecTime(addProc(eList)(SIZE_1000000))(i) :: listResult
     }
 
     printAverage("Vector", vectorResult, "List", listResult)
@@ -34,10 +33,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      vectorResult =
-        vectorResult.+:(printExecTime(addProc(eVector)(SIZE_10000000))(i))
-      listResult =
-        listResult.+:(printExecTime(addProc(eList)(SIZE_10000000))(i))
+      vectorResult = printExecTime(addProc(eVector)(SIZE_10000000))(i) :: vectorResult
+      listResult = printExecTime(addProc(eList)(SIZE_10000000))(i) :: listResult
     }
     printAverage("Vector", vectorResult, "List", listResult)
   }
@@ -66,9 +63,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      vectorResult =
-        vectorResult.+:(printExecTime(randomSumProc(vector_10000))(i))
-      listResult = listResult.+:(printExecTime(randomSumProc(list_10000))(i))
+      vectorResult = printExecTime(randomSumProc(vector_10000))(i) :: vectorResult
+      listResult = printExecTime(randomSumProc(list_10000))(i) :: listResult
     }
 
     printAverage("Vector", vectorResult, "List", listResult)
@@ -80,9 +76,8 @@ trait SeqPerformance extends PerformanceSupport {
 
     // Listのランダムアクセスが遅すぎるので、計測を10回に減らす
     for (i <- 1 to 10) {
-      vectorResult =
-        vectorResult.+:(printExecTime(randomSumProc(vector_100000))(i))
-      listResult = listResult.+:(printExecTime(randomSumProc(list_100000))(i))
+      vectorResult = printExecTime(randomSumProc(vector_100000))(i) :: vectorResult
+      listResult = printExecTime(randomSumProc(list_100000))(i) :: listResult
     }
 
     printAverage("Vector", vectorResult, "List", listResult)
@@ -114,10 +109,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      vectorResult =
-        vectorResult.+:(printExecTime(sequentialSumProc(vector_10000))(i))
-      listResult =
-        listResult.+:(printExecTime(sequentialSumProc(list_10000))(i))
+      vectorResult = printExecTime(sequentialSumProc(vector_10000))(i) :: vectorResult
+      listResult = printExecTime(sequentialSumProc(list_10000))(i) :: listResult
     }
 
     printAverage("Vector", vectorResult, "List", listResult)
@@ -128,10 +121,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      vectorResult =
-        vectorResult.+:(printExecTime(sequentialSumProc(vector_100000))(i))
-      listResult =
-        listResult.+:(printExecTime(sequentialSumProc(list_100000))(i))
+      vectorResult = printExecTime(sequentialSumProc(vector_100000))(i) :: vectorResult
+      listResult = printExecTime(sequentialSumProc(list_100000))(i) :: listResult
     }
 
     printAverage("Vector", vectorResult, "List", listResult)
@@ -142,10 +133,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      vectorResult =
-        vectorResult.+:(printExecTime(sequentialSumProc(vector_1000000))(i))
-      listResult =
-        listResult.+:(printExecTime(sequentialSumProc(list_1000000))(i))
+      vectorResult = printExecTime(sequentialSumProc(vector_1000000))(i) :: vectorResult
+      listResult = printExecTime(sequentialSumProc(list_1000000))(i) :: listResult
     }
 
     printAverage("Vector", vectorResult, "List", listResult)
@@ -169,8 +158,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      lazyResult = lazyResult.+:(printExecTime(addProc(eLazy)(SIZE_1000000))(i))
-      listResult = listResult.+:(printExecTime(addProc(eList)(SIZE_1000000))(i))
+      lazyResult = printExecTime(addProc(eLazy)(SIZE_1000000))(i) :: lazyResult
+      listResult = printExecTime(addProc(eList)(SIZE_1000000))(i) :: listResult
     }
 
     printAverage("LazyList", lazyResult, "List", listResult)
@@ -181,10 +170,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      lazyResult =
-        lazyResult.+:(printExecTime(addProc(eLazy)(SIZE_10000000))(i))
-      listResult =
-        listResult.+:(printExecTime(addProc(eList)(SIZE_10000000))(i))
+      lazyResult = printExecTime(addProc(eLazy)(SIZE_10000000))(i) :: lazyResult
+      listResult = printExecTime(addProc(eList)(SIZE_10000000))(i) :: listResult
     }
     printAverage("LazyList", lazyResult, "List", listResult)
   }
@@ -213,9 +200,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      lazyListResult =
-        lazyListResult.+:(printExecTime(randomSumProc(lazyList_10000))(i))
-      listResult = listResult.+:(printExecTime(randomSumProc(list_10000))(i))
+      lazyListResult = printExecTime(randomSumProc(lazyList_10000))(i) :: lazyListResult
+      listResult = printExecTime(randomSumProc(list_10000))(i) :: listResult
     }
 
     printAverage("LazyList", lazyListResult, "List", listResult)
@@ -227,9 +213,8 @@ trait SeqPerformance extends PerformanceSupport {
 
     // Listのランダムアクセスが遅すぎるので、計測を10回に減らす
     for (i <- 1 to 10) {
-      lazyListResult =
-        lazyListResult.+:(printExecTime(randomSumProc(lazyList_100000))(i))
-      listResult = listResult.+:(printExecTime(randomSumProc(list_100000))(i))
+      lazyListResult = printExecTime(randomSumProc(lazyList_100000))(i) :: lazyListResult
+      listResult = printExecTime(randomSumProc(list_100000))(i) :: listResult
     }
 
     printAverage("LazyList", lazyListResult, "List", listResult)
@@ -261,10 +246,8 @@ trait SeqPerformance extends PerformanceSupport {
     listResult = List.empty[Long]
 
     for (i <- 1 to 100) {
-      lazyListResult =
-        lazyListResult.+:(printExecTime(sequentialSumProc(lazyList_10000))(i))
-      listResult =
-        listResult.+:(printExecTime(sequentialSumProc(list_10000))(i))
+      lazyListResult = printExecTime(sequentialSumProc(lazyList_10000))(i) :: lazyListResult
+      listResult = printExecTime(sequentialSumProc(list_10000))(i) :: listResult
     }
 
     printAverage("LazyList", lazyListResult, "List", listResult)
@@ -276,9 +259,9 @@ trait SeqPerformance extends PerformanceSupport {
 
     for (i <- 1 to 100) {
       lazyListResult =
-        lazyListResult.+:(printExecTime(sequentialSumProc(lazyList_100000))(i))
+        printExecTime(sequentialSumProc(lazyList_100000))(i) :: lazyListResult
       listResult =
-        listResult.+:(printExecTime(sequentialSumProc(list_100000))(i))
+        printExecTime(sequentialSumProc(list_100000))(i) :: listResult
     }
 
     printAverage("LazyList", lazyListResult, "List", listResult)
@@ -290,9 +273,9 @@ trait SeqPerformance extends PerformanceSupport {
 
     for (i <- 1 to 100) {
       lazyListResult =
-        lazyListResult.+:(printExecTime(sequentialSumProc(lazyList_1000000))(i))
+        printExecTime(sequentialSumProc(lazyList_1000000))(i) :: lazyListResult
       listResult =
-        listResult.+:(printExecTime(sequentialSumProc(list_1000000))(i))
+        printExecTime(sequentialSumProc(list_1000000))(i) :: listResult
     }
 
     printAverage("LazyList", lazyListResult, "List", listResult)
@@ -301,7 +284,7 @@ trait SeqPerformance extends PerformanceSupport {
   def addProc(seq: Seq[Int])(size: Int): Seq[Int] = {
     var s = seq
     for (_ <- 1 to size) {
-      s = s.+:(randomInt(SIZE_100000000))
+      s = randomInt(SIZE_100000000) +: s
     }
     s
   }
@@ -309,7 +292,7 @@ trait SeqPerformance extends PerformanceSupport {
   def addLazyProc(seq: LazyList[Int])(size: Int): LazyList[Int] = {
     var s = seq
     for (_ <- 1 to size) {
-      s = s.+:(randomInt(SIZE_100000000))
+      s = randomInt(SIZE_100000000) +: s
     }
     s
   }
@@ -324,10 +307,9 @@ trait SeqPerformance extends PerformanceSupport {
 
   def sequentialSumProc(seq: Seq[Int]): Int = {
     def loop(list: Seq[Int], sum: Int): Int = {
-      // `head :: tail` や `elm :: Nil` のような書き方をすると、Vectorを渡した時に例外が発生する
       list match {
         case _ if list.isEmpty => sum
-        case _                 => loop(list.tail, sum + list.head)
+        case head +: tail      => loop(tail, sum + head)
       }
     }
 

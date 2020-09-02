@@ -33,8 +33,8 @@ trait PerformanceSupport {
                    p1Result: List[Long],
                    p2: String,
                    p2Result: List[Long]): Unit = {
-    println(s"${p1}平均処理時間: ${p1Result.foldLeft(0L)(_ + _) / p1Result.size} ミリ秒")
-    println(s"${p2}平均処理時間: ${p2Result.foldLeft(0L)(_ + _) / p2Result.size} ミリ秒")
+    println(s"${p1}平均処理時間: ${p1Result.sum / p1Result.size} ミリ秒")
+    println(s"${p2}平均処理時間: ${p2Result.sum / p2Result.size} ミリ秒")
   }
 
   def printAverage(p1: String,
@@ -43,9 +43,9 @@ trait PerformanceSupport {
                    p2Result: List[Long],
                    p3: String,
                    p3Result: List[Long]): Unit = {
-    println(s"${p1}平均処理時間: ${p1Result.foldLeft(0L)(_ + _) / p1Result.size} ミリ秒")
-    println(s"${p2}平均処理時間: ${p2Result.foldLeft(0L)(_ + _) / p2Result.size} ミリ秒")
-    println(s"${p3}平均処理時間: ${p3Result.foldLeft(0L)(_ + _) / p3Result.size} ミリ秒")
+    println(s"${p1}平均処理時間: ${p1Result.sum / p1Result.size} ミリ秒")
+    println(s"${p2}平均処理時間: ${p2Result.sum / p2Result.size} ミリ秒")
+    println(s"${p3}平均処理時間: ${p3Result.sum / p3Result.size} ミリ秒")
   }
 
   def printAverage(p1: String,
@@ -56,10 +56,10 @@ trait PerformanceSupport {
                    p3Result: List[Long],
                    p4: String,
                    p4Result: List[Long]): Unit = {
-    println(s"${p1}平均処理時間: ${p1Result.foldLeft(0L)(_ + _) / p1Result.size} ミリ秒")
-    println(s"${p2}平均処理時間: ${p2Result.foldLeft(0L)(_ + _) / p2Result.size} ミリ秒")
-    println(s"${p3}平均処理時間: ${p3Result.foldLeft(0L)(_ + _) / p3Result.size} ミリ秒")
-    println(s"${p4}平均処理時間: ${p4Result.foldLeft(0L)(_ + _) / p4Result.size} ミリ秒")
+    println(s"${p1}平均処理時間: ${p1Result.sum / p1Result.size} ミリ秒")
+    println(s"${p2}平均処理時間: ${p2Result.sum / p2Result.size} ミリ秒")
+    println(s"${p3}平均処理時間: ${p3Result.sum / p3Result.size} ミリ秒")
+    println(s"${p4}平均処理時間: ${p4Result.sum / p4Result.size} ミリ秒")
   }
 
   def randomInt(upper: Int): Int = {
