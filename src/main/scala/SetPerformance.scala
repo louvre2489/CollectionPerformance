@@ -382,7 +382,7 @@ trait SetPerformance extends PerformanceSupport {
   def addSetProc(set: Set[Int])(size: Int): Set[Int] = {
     var s = set
     for (i <- 1 to size) {
-      s = s.+(i)
+      s = s + i
     }
     s
   }

@@ -284,7 +284,7 @@ trait SeqPerformance extends PerformanceSupport {
   def addProc(seq: Seq[Int])(size: Int): Seq[Int] = {
     var s = seq
     for (_ <- 1 to size) {
-      s = s.+:(randomInt(SIZE_100000000))
+      s = randomInt(SIZE_100000000) +: s
     }
     s
   }
@@ -292,7 +292,7 @@ trait SeqPerformance extends PerformanceSupport {
   def addLazyProc(seq: LazyList[Int])(size: Int): LazyList[Int] = {
     var s = seq
     for (_ <- 1 to size) {
-      s = s.+:(randomInt(SIZE_100000000))
+      s = randomInt(SIZE_100000000) +: s
     }
     s
   }
@@ -307,10 +307,9 @@ trait SeqPerformance extends PerformanceSupport {
 
   def sequentialSumProc(seq: Seq[Int]): Int = {
     def loop(list: Seq[Int], sum: Int): Int = {
-      // `head :: tail` や `elm :: Nil` のような書き方をすると、Vectorを渡した時に例外が発生する
       list match {
         case _ if list.isEmpty => sum
-        case _                 => loop(list.tail, sum + list.head)
+        case head +: tail      => loop(tail, sum + head)
       }
     }
 
